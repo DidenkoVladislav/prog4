@@ -42,7 +42,7 @@ void queue_enqueue(tdQueue *q, void *d)
         q->tail = new_node;
     }
     q->size++;
-    printf("%p добавлен в очередь %p\n", d, q);
+    // printf("%p добавлен в очередь %p\n", d, q);
 }
 
 // Вывод очереди
@@ -149,7 +149,7 @@ void queue_fenqueue(tdQueue *q, void *d)
         q->tail = new_node;
     }
     q->size++;
-    printf("%p добавлен в очередь %p\n", d, q);
+    // printf("%p добавлен в очередь %p\n", d, q);
 }
 
 // Освобождение памяти
@@ -236,7 +236,7 @@ void *queue_iterator_next(QueueIterator *it)
 {
     if (it->current == NULL)
     {
-        printf("Итератор %p дошёл до конца\n", it);
+        // printf("Итератор %p дошёл до конца\n", it);
         return NULL;
     }
 

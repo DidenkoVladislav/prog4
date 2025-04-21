@@ -9,7 +9,8 @@
                 "-g",
                 "bitrgbled.c",
                 "matrix2d.c",
-                "contstack.c",
+                "contqueue.c",
+                "fioqueue.c",
                 "main.c",
                 "-o",
                 "a.out"

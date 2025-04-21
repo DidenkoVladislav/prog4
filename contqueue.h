@@ -6,7 +6,7 @@
 #include <stdbool.h>
 #include <math.h>
 
-#define MAX_QUEUE_SIZE (int)(3 * sqrt(2))
+#define MAX_QUEUE_SIZE 10000
 
 // Структура узел
 typedef struct tdNode

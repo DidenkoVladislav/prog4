@@ -40,7 +40,7 @@ void bitrgbled_setblue(ulg *s, uch n)
 // Установка яркости
 void bitrgbled_setbrightness(ulg *s, uch n)
 {
-    if (n > 100)
+    if (n > BRIGHTNESS_MAX)
     {
         exit(EXIT_FAILURE);
     }
@@ -51,11 +51,11 @@ void bitrgbled_setbrightness(ulg *s, uch n)
 // Установка температуры цвета
 void bitrgbled_setcolortemp(ulg *s, ushort n)
 {
-    if (n < 800)
+    if (n < COLORTEMP_MIN)
     {
         exit(EXIT_FAILURE);
     }
-    if (n > 15000)
+    if (n > COLORTEMP_MAX)
     {
         exit(EXIT_FAILURE);
     }
@@ -66,7 +66,7 @@ void bitrgbled_setcolortemp(ulg *s, ushort n)
 // Установка типа управления
 void bitrgbled_setcontroltype(ulg *s, uch n)
 {
-    if (n > 8)
+    if (n > CONTROL_TYPE_MAX)
     {
         exit(EXIT_FAILURE);
     }
@@ -77,7 +77,7 @@ void bitrgbled_setcontroltype(ulg *s, uch n)
 // Установка режима работы
 void bitrgbled_setmode(ulg *s, uch n)
 {
-    if (n > 2)
+    if (n > MODE_MAX)
     {
         exit(EXIT_FAILURE);
     }
@@ -155,7 +155,7 @@ void bitrgbled_struct_setblue(BITrgbled *b, uch n)
 void bitrgbled_struct_setbrightness(BITrgbled *b, uch n)
 {
     mem_check(b);
-    if (n > 100)
+    if (n > BRIGHTNESS_MAX)
     {
         exit(EXIT_FAILURE);
     }
@@ -166,11 +166,11 @@ void bitrgbled_struct_setbrightness(BITrgbled *b, uch n)
 void bitrgbled_struct_setcolortemp(BITrgbled *b, ushort n)
 {
     mem_check(b);
-    if (n < 800)
+    if (n < COLORTEMP_MIN)
     {
         exit(EXIT_FAILURE);
     }
-    if (n > 15000)
+    if (n > COLORTEMP_MAX)
     {
         exit(EXIT_FAILURE);
     }
@@ -181,7 +181,7 @@ void bitrgbled_struct_setcolortemp(BITrgbled *b, ushort n)
 void bitrgbled_struct_setcontroltype(BITrgbled *b, uch n)
 {
     mem_check(b);
-    if (n > 8)
+    if (n > CONTROL_TYPE_MAX)
     {
         exit(EXIT_FAILURE);
     }
@@ -192,7 +192,7 @@ void bitrgbled_struct_setcontroltype(BITrgbled *b, uch n)
 void bitrgbled_struct_setmode(BITrgbled *b, uch n)
 {
     mem_check(b);
-    if (n > 2)
+    if (n > MODE_MAX)
     {
         exit(EXIT_FAILURE);
     }
@@ -220,7 +220,7 @@ static void printbits(unsigned int num, int bits)
 
 void show_struct_bitrgbled_bits(BITrgbled *b)
 {
-    int size = CHAR_BIT * sizeof(ulg) - (8 + 8 + 8 + 8 + 14 + 3 + 2);
+    int size = CHAR_BIT * sizeof(ulg) - (8 + 8 + 8 + 7 + 14 + 3 + 2);
 
     for (int i = size - 1; i >= 0; i--)
         putchar('0');
@@ -228,7 +228,7 @@ void show_struct_bitrgbled_bits(BITrgbled *b)
     printbits(b->mode, 2);
     printbits(b->controltype, 3);
     printbits(b->colortemp, 14);
-    printbits(b->brightness, 8);
+    printbits(b->brightness, 7);
     printbits(b->blue, 8);
     printbits(b->green, 8);
     printbits(b->red, 8);
@@ -241,4 +241,16 @@ void destroy_struct_bitrgbled(BITrgbled *b)
 {
     free(b);
     b = NULL;
+}
+
+// Получение структуры используя переменную
+void bitrgbled_struct_from_bitargbled(ulg *s, BITrgbled *b)
+{
+    b->red = (*s & RED_MASK) >> RED;
+    b->green = (*s & GREEN_MASK) >> GREEN;
+    b->blue = (*s & BLUE_MASK) >> BLUE;
+    b->brightness = (*s & BRIGHTNESS_MASK) >> BRIGHTNESS;
+    b->colortemp = (*s & COLORTEMP_MASK) >> COLORTEMP;
+    b->controltype = (*s & CONTROL_TYPE_MASK) >> CONTROL_TYPE;
+    b->mode = (*s & MODE_MASK) >> MODE;
 }

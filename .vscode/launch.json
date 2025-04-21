@@ -7,7 +7,7 @@
             "request": "launch",
             // "program": "${workspaceFolder}/a.exe", // Для Windows
             "program": "${workspaceFolder}/a.out", // Для Linux/Unix
-            "args": [],
+            "args": ["get", "-b", "1", "test.bin"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

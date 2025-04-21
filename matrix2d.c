@@ -449,20 +449,37 @@ void decrement_matrix2d(Matrix2d *m)
 }
 
 // Создание структуры со случайной матрицей
-Matrix2d *random_matrix2d(size_t rows, size_t cols)
+Matrix2d *random_matrix2d(size_t rows, size_t cols, TYPE_VAR type)
 {
 
     Matrix2d *m = calloc(1, sizeof(Matrix2d));
     mem_check(m);
-    setter_matrix2d(m, 0, rows, cols, union_var_d);
+    setter_matrix2d(m, 0, rows, cols, type);
 
-    for (size_t i = 0, j; i < rows; ++i)
+    if (type == union_var_i)
     {
-        for (j = 0; j < cols; ++j)
+        for (size_t i = 0, j; i < rows; ++i)
         {
-            m->arr[i][j].var_d = (double)(rand() % 46 - 20);
+            for (j = 0; j < cols; ++j)
+            {
+                m->arr[i][j].var_i = rand() % 46 - 20;
+            }
         }
     }
+    else
+    {
+        for (size_t i = 0, j; i < rows; ++i)
+        {
+            for (j = 0; j < cols; ++j)
+            {
+                m->arr[i][j].var_d = (double)(rand() % 46 - 20);
+            }
+        }
+    }
+
+    m->bitrgbled = calloc(1, sizeof(BITrgbled));
+    if (m->bitrgbled == NULL)
+        exit(EXIT_FAILURE);
 
     return m;
 }

@@ -4,7 +4,7 @@
 #include "bitrgbled.h"
 #include <math.h>
 #include <stdalign.h>
-#include <stdarg.h>
+// #include <stdarg.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -63,7 +63,7 @@ void get_matrix2d_row(Matrix2d *m, size_t row);
 
 void show_matrix2d(Matrix2d *m);
 
-Matrix2d *random_matrix2d(size_t rows, size_t cols);
+Matrix2d *random_matrix2d(size_t rows, size_t cols, TYPE_VAR type);
 
 Matrix2d *matrix_transpose(Matrix2d *m);
 

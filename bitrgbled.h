@@ -21,7 +21,12 @@ enum
     CONTROL_TYPE = 45,
     CONTROL_TYPE_MASK = 0xE00000000000,
     MODE = 48,
-    MODE_MASK = 0x3000000000000
+    MODE_MASK = 0x3000000000000,
+    BRIGHTNESS_MAX = 100,
+    COLORTEMP_MIN = 800,
+    COLORTEMP_MAX = 15000,
+    CONTROL_TYPE_MAX = 8,
+    MODE_MAX = 2
 };
 
 // Объявления
@@ -34,9 +39,9 @@ typedef struct
 {
     uch red : 8;
     uch green : 8;
-    uch blue : 7;
+    uch blue : 8;
+    uch brightness : 7;
     uch : 1;
-    uch brightness : 8;
     ushort colortemp : 14;
     ushort : 2;
     uch controltype : 3;
@@ -46,6 +51,7 @@ typedef struct
 } BITrgbled;
 
 // Процедуры для работы с переменной
+
 void bitrgbled_constructor(ulg *s, uch red, uch green, uch blue, uch brightness, ushort colortemp, uch controltype, uch mode);
 void bitrgbled_setred(ulg *s, uch n);
 void bitrgbled_setgreen(ulg *s, uch n);
@@ -70,6 +76,8 @@ void bitrgbled_struct_setmode(BITrgbled *b, uch n);
 
 void show_struct_bitrgbled(BITrgbled *b);
 void show_struct_bitrgbled_bits(BITrgbled *b);
+
+void bitrgbled_struct_from_bitargbled(ulg *s, BITrgbled *b);
 
 void destroy_struct_bitrgbled(BITrgbled *b);
 #endif
