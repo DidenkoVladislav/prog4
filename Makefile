@@ -6,3 +6,22 @@ all:
 	$(CC) $(CFLAGS) $(SRCS) -o main.out
 valgrind:
 	valgrind --leak-check=full --show-leak-kinds=all ./main.out "load" "-t" "some.txt"
+save_t:
+	./main.out save -t test.txt
+load_t:
+	./main.out load -t test.txt
+save_b:
+	./main.out save -b test.bin
+load_b:
+	./main.out load -b test.bin
+get_t:
+	./main.out get -t 1 test.txt
+get_b:
+	./main.out get -b 1 test.bin
+tets_funcs:
+	./main.out save -t test.txt
+	./main.out load -t test.txt
+	./main.out save -b test.bin
+	./main.out load -b test.bin
+	./main.out get -t 1 test.txt
+	./main.out get -b 1 test.bin
