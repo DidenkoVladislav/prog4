@@ -23,6 +23,10 @@ get_t:
 	./main.out get -t 1 test.txt
 get_b:
 	./main.out get -b 1 test.bin
+list_t:
+	./main.out list -t test.txt
+list_b:
+	./main.out list -b test.bin
 tets_funcs:
 	./main.out save -t test.txt
 	./main.out load -t test.txt

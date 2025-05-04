@@ -15,14 +15,6 @@ int main(int argc, char const *argv[])
     {
         if ((strcmp(argv[2], "-t") == 0) || (strcmp(argv[2], "--text") == 0))
         {
-            // puts("text");
-            // Matrix2d *m = matrix2d_default_constructor();
-            // bitrgbled_setred(&m->settings, 100);
-            // if (!save_matrix2d_to_file(argv[3], m, TEXT_MODE))
-            // {
-            //     printf("Ошибка записи файла %s\n", argv[3]);
-            //     exit(EXIT_FAILURE);
-            // }
 
             tdQueue *q = rand_gen_matrix2d_in_queue(ELEMENTS);
             save_queue_to_file(argv[3], q, TEXT_MODE);
@@ -37,14 +29,6 @@ int main(int argc, char const *argv[])
         }
         else if ((strcmp(argv[2], "-b") == 0) || (strcmp(argv[2], "--binary") == 0))
         {
-            // puts("binary");
-            // Matrix2d *m = matrix2d_default_constructor();
-            // bitrgbled_setred(&m->settings, 100);
-            // if (!save_matrix2d_to_file(argv[3], m, BINARY_MODE))
-            // {
-            //     printf("Ошибка записи файла %s\n", argv[3]);
-            //     exit(EXIT_FAILURE);
-            // }
 
             tdQueue *q = rand_gen_matrix2d_in_queue(ELEMENTS);
             save_queue_to_file(argv[3], q, BINARY_MODE);
@@ -69,12 +53,6 @@ int main(int argc, char const *argv[])
     {
         if ((strcmp(argv[2], "-t") == 0) || (strcmp(argv[2], "--text") == 0))
         {
-            // puts("text");
-            // Matrix2d *m = load_matrix2d_from_file(argv[3], TEXT_MODE);
-            // show_matrix2d(m);
-            // show_bitrgbled_bits(m->settings);
-            // show_struct_bitrgbled_bits(m->bitrgbled);
-
             tdQueue *q = load_queue_from_file(argv[3], TEXT_MODE);
             printf("Размер очереди: %d\n", queue_size(q));
             QueueIterator *it = queue_iterator_create(q, 0);
@@ -96,11 +74,6 @@ int main(int argc, char const *argv[])
         }
         else if ((strcmp(argv[2], "-b") == 0) || (strcmp(argv[2], "--binary") == 0))
         {
-            // puts("binary");
-            // Matrix2d *m = load_matrix2d_from_file(argv[3], BINARY_MODE);
-            // show_matrix2d(m);
-            // show_bitrgbled_bits(m->settings);
-            // show_struct_bitrgbled_bits(m->bitrgbled);
 
             tdQueue *q = load_queue_from_file(argv[3], BINARY_MODE);
             printf("Размер очереди: %d\n", queue_size(q));
@@ -131,7 +104,54 @@ int main(int argc, char const *argv[])
     }
     else if (strcmp(argv[1], "list") == 0)
     {
-        ;
+        if ((strcmp(argv[2], "-t") == 0) || (strcmp(argv[2], "--text") == 0))
+        {
+            tdQueue *q = load_queue_from_file(argv[3], TEXT_MODE);
+            printf("Размер очереди: %d\n", queue_size(q));
+            QueueIterator *it = queue_iterator_create(q, 0);
+            Matrix2d *m;
+            int i = 0;
+            while ((m = queue_iterator_next(it)) != NULL)
+            {
+                printf("Index %d - %p\n", i++, m);
+            }
+            free(it);
+            QueueIterator *it2 = queue_iterator_create(q, 0);
+            for (int i = 0; i < q->size; i++)
+            {
+                destroy_matrix2d(queue_iterator_next(it2), 1);
+            }
+            free(it2);
+            queue_free(q);
+        }
+        else if ((strcmp(argv[2], "-b") == 0) || (strcmp(argv[2], "--binary") == 0))
+        {
+
+            tdQueue *q = load_queue_from_file(argv[3], BINARY_MODE);
+            printf("Размер очереди: %d\n", queue_size(q));
+            QueueIterator *it = queue_iterator_create(q, 0);
+            Matrix2d *m;
+            int i = 0;
+            while ((m = queue_iterator_next(it)) != NULL)
+            {
+                printf("Index %d - %p\n", i++, m);
+            }
+            free(it);
+            QueueIterator *it2 = queue_iterator_create(q, 0);
+            for (int i = 0; i < q->size; i++)
+            {
+                destroy_matrix2d(queue_iterator_next(it2), 1);
+            }
+            free(it2);
+            queue_free(q);
+        }
+        else
+        {
+            printf("Неизвестный аргумент '%s': \
+ожидалось (-t, --text, -b, --binary)\n",
+                   argv[2]);
+            exit(EXIT_FAILURE);
+        }
     }
     else if (strcmp(argv[1], "get") == 0)
     {
