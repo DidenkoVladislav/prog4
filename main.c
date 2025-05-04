@@ -57,7 +57,7 @@ int main(int argc, char const *argv[])
             printf("Размер очереди: %d\n", queue_size(q));
             QueueIterator *it = queue_iterator_create(q, 0);
             Matrix2d *m;
-            int i = 1;
+            int i = 0;
             while ((m = queue_iterator_next(it)) != NULL)
             {
                 printf("%d\n", i++);
@@ -79,7 +79,7 @@ int main(int argc, char const *argv[])
             printf("Размер очереди: %d\n", queue_size(q));
             QueueIterator *it = queue_iterator_create(q, 0);
             Matrix2d *m;
-            int i = 1;
+            int i = 0;
             while ((m = queue_iterator_next(it)) != NULL)
             {
                 printf("%d\n", i++);
