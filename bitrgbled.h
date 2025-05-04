@@ -77,7 +77,8 @@ void bitrgbled_struct_setmode(BITrgbled *b, uch n);
 void show_struct_bitrgbled(BITrgbled *b);
 void show_struct_bitrgbled_bits(BITrgbled *b);
 
-void bitrgbled_struct_from_bitargbled(ulg *s, BITrgbled *b);
+void bitrgbled_struct_from_bitrgbled(ulg *s, BITrgbled *b);
+ulg rand_gen_bitrgbled(void);
 
 void destroy_struct_bitrgbled(BITrgbled *b);
 #endif

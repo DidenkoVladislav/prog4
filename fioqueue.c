@@ -14,15 +14,6 @@ tdQueue *rand_gen_matrix2d_in_queue(size_t n)
 
         Matrix2d *m = random_matrix2d(rows, cols, type);
 
-        uch red = (uch)rand();
-        uch green = (uch)rand();
-        uch blue = (uch)rand();
-        uch brightness = (uch)rand() % BRIGHTNESS_MAX;
-        ushort colortemp = COLORTEMP_MIN + (ushort)rand() % (COLORTEMP_MAX - COLORTEMP_MIN + 1);
-        uch controltype = (uch)rand() % CONTROL_TYPE_MAX;
-        uch mode = (uch)rand() % MODE_MAX;
-        bitrgbled_constructor(&m->settings, red, green, blue, brightness, colortemp, controltype, mode);
-        bitrgbled_struct_from_bitargbled(&m->settings, m->bitrgbled);
         queue_enqueue(q, m);
     }
 
@@ -155,7 +146,7 @@ static Matrix2d *load_matrix2d_from_text(FILE *fp)
         destroy_matrix2d(m, true);
         return NULL;
     }
-    bitrgbled_struct_from_bitargbled(&m->settings, m->bitrgbled);
+    bitrgbled_struct_from_bitrgbled(&m->settings, m->bitrgbled);
 
     return m;
 }
@@ -226,7 +217,7 @@ static Matrix2d *load_matrix2d_from_binary(FILE *fp)
         destroy_matrix2d(m, true);
         return NULL;
     }
-    bitrgbled_struct_from_bitargbled(&m->settings, m->bitrgbled);
+    bitrgbled_struct_from_bitrgbled(&m->settings, m->bitrgbled);
 
     return m;
 }

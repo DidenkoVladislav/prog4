@@ -10,6 +10,7 @@
         "matrix2d.h": "c",
         "stdbool.h": "c",
         "stdarg.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "fioqueue.h": "c"
     }
 }

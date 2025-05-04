@@ -244,7 +244,7 @@ void destroy_struct_bitrgbled(BITrgbled *b)
 }
 
 // Получение структуры используя переменную
-void bitrgbled_struct_from_bitargbled(ulg *s, BITrgbled *b)
+void bitrgbled_struct_from_bitrgbled(ulg *s, BITrgbled *b)
 {
     b->red = (*s & RED_MASK) >> RED;
     b->green = (*s & GREEN_MASK) >> GREEN;
@@ -253,4 +253,21 @@ void bitrgbled_struct_from_bitargbled(ulg *s, BITrgbled *b)
     b->colortemp = (*s & COLORTEMP_MASK) >> COLORTEMP;
     b->controltype = (*s & CONTROL_TYPE_MASK) >> CONTROL_TYPE;
     b->mode = (*s & MODE_MASK) >> MODE;
+}
+
+// Генерация рандомной структуры bitrgbled(переменная)
+ulg rand_gen_bitrgbled(void)
+{
+    ulg settings = 0;
+
+    uch red = (uch)rand();
+    uch green = (uch)rand();
+    uch blue = (uch)rand();
+    uch brightness = (uch)rand() % BRIGHTNESS_MAX;
+    ushort colortemp = COLORTEMP_MIN + (ushort)rand() % (COLORTEMP_MAX - COLORTEMP_MIN + 1);
+    uch controltype = (uch)rand() % CONTROL_TYPE_MAX;
+    uch mode = (uch)rand() % MODE_MAX;
+    bitrgbled_constructor(&settings, red, green, blue, brightness, colortemp, controltype, mode);
+
+    return settings;
 }

@@ -477,9 +477,12 @@ Matrix2d *random_matrix2d(size_t rows, size_t cols, TYPE_VAR type)
         }
     }
 
+    m->settings = rand_gen_bitrgbled();
+
     m->bitrgbled = calloc(1, sizeof(BITrgbled));
     if (m->bitrgbled == NULL)
         exit(EXIT_FAILURE);
+    bitrgbled_struct_from_bitrgbled(&m->settings, m->bitrgbled);
 
     return m;
 }
