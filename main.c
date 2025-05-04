@@ -147,6 +147,7 @@ int main(int argc, char const *argv[])
                 Matrix2d *m = get_matrix2d_from_text_file(argv[4], (int)*argv[3] - '0');
                 show_matrix2d(m);
                 show_bitrgbled_bits(m->settings);
+                destroy_matrix2d(m, true);
             }
             else if ((strcmp(argv[2], "-b") == 0) || (strcmp(argv[2], "--binary") == 0))
             {
@@ -154,6 +155,7 @@ int main(int argc, char const *argv[])
                 get_matrix2d_from_binary_file(argv[4], (int)*argv[3] - '0', m);
                 show_matrix2d(m);
                 show_bitrgbled_bits(m->settings);
+                destroy_matrix2d(m, true);
             }
             else
             {
