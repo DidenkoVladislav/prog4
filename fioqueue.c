@@ -1,5 +1,21 @@
 #include "fioqueue.h"
 
+Matrix2d **rand_gen_matrix2d(size_t n)
+{
+    Matrix2d **matrices = (Matrix2d **)calloc(n, sizeof(Matrix2d *));
+
+    for (size_t i = 0; i < n; i++)
+    {
+        int rows = rand() % MAX_SIZE + 1;
+        int cols = rand() % MAX_SIZE + 1;
+        TYPE_VAR type = rand() % 2;
+
+        matrices[i] = random_matrix2d(rows, cols, type);
+    }
+
+    return matrices;
+}
+
 tdQueue *rand_gen_matrix2d_in_queue(size_t n)
 {
     tdQueue *q = queue_create();

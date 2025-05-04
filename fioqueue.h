@@ -12,6 +12,7 @@
 
 // Прототипы
 
+Matrix2d **rand_gen_matrix2d(size_t n);
 tdQueue *rand_gen_matrix2d_in_queue(size_t n);
 int save_matrix2d_to_file(const char *filename, Matrix2d *m, int mode);
 Matrix2d *load_matrix2d_from_file(const char *filename, int mode);
